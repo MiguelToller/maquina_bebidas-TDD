@@ -6,9 +6,11 @@ class MaquinaBebidas:
     def __init__(self, estoque_inicial: dict[str, int] = None):
         self._estoque = estoque_inicial if estoque_inicial else {}
 
-        for bebida in self._estoque.keys():
+        for bebida, quantidade in self._estoque.items():
             if bebida not in self._BEBIDAS_VALIDAS:
                 raise Exception("Bebida nao cadastrada")
+            if quantidade < 0:
+                raise Exception("Quantidade deve ser positiva")
 
     @property
     def estoque(self):
