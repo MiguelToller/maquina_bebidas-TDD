@@ -40,6 +40,12 @@ class TestBebidas(TestCase):
             MaquinaBebidas(estoque_inicial={"Suco": 2})
         self.assertTrue("Bebida nao cadastrada" in str(context.exception))
 
+    def test_nao_deve_retirar_bebida_com_valor_negativo(self):
+        maquina = MaquinaBebidas(estoque_inicial={"Sprite": 5})
+        with self.assertRaises(Exception) as context:
+            maquina.retirar("Sprite", -1)
+        self.assertTrue("Quantidade deve ser positiva" in str(context.exception))
+
     def test_nao_deve_abastecer_bebida_com_valor_negativo(self):
         maquina = MaquinaBebidas(estoque_inicial={"Coca-Cola": 5})
         with self.assertRaises(Exception) as context:
