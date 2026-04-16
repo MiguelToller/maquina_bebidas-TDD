@@ -6,7 +6,8 @@ class TestBebidas(TestCase):
 
     def test_deve_retirar_bebida_e_diminuir_estoque(self):
         # Estoque inicial da maquina
-        maquina = MaquinaBebidas()
-        # Retirar 1 Coca-Cola
-        estoque = maquina.retirar("Coca-Cola", {"Coca-Cola": 1})
-        self.assertEqual({}, estoque)
+        maquina = MaquinaBebidas(estoque_inicial={"Coca-Cola": 1})
+        # Retirar a bebida (nome do produto, quantidade)
+        estoque = maquina.retirar("Coca-Cola", 1)
+        # Comparacao do retorno com o estoque
+        self.assertEqual({"Coca-Cola": 0}, estoque)
