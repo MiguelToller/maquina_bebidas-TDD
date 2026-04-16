@@ -28,3 +28,8 @@ class TestBebidas(TestCase):
         with self.assertRaises(Exception) as context:
             maquina.abastecer("Cerveja", 5)
         self.assertTrue("Bebida nao cadastrada" in str(context.exception))
+
+    def test_nao_deve_iniciar_maquina_com_bebida_nao_cadastrada(self):
+        with self.assertRaises(Exception) as context:
+            MaquinaBebidas(estoque_inicial={"Cerveja": 2})
+        self.assertTrue("Bebida nao cadastrada" in str(context.exception))

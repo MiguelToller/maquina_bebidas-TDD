@@ -1,10 +1,14 @@
 
 class MaquinaBebidas:
 
-    _BEBIDAS_VALIDAS = ["Coca-Cola", "Sprite", "Agua", "Fanta-Laranja", "Fanta-Uva"]
+    _BEBIDAS_VALIDAS = ["Coca-Cola", "Sprite", "Guarana", "Agua"]
 
     def __init__(self, estoque_inicial: dict[str, int] = None):
         self._estoque = estoque_inicial if estoque_inicial else {}
+
+        for bebida in self._estoque.keys():
+            if bebida not in self._BEBIDAS_VALIDAS:
+                raise Exception("Bebida nao cadastrada")
 
     @property
     def estoque(self):
