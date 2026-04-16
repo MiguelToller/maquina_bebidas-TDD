@@ -1,3 +1,5 @@
 
 class MaquinaBebidas:
-    pass
+    
+    def retirar(self, bebida, quantidade):
+        return {}
