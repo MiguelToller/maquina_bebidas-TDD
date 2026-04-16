@@ -16,3 +16,9 @@ class TestBebidas(TestCase):
         maquina = MaquinaBebidas(estoque_inicial={"Coca-Cola": 0})
         estoque = maquina.abastecer("Coca-Cola", 1)
         self.assertEqual({"Coca-Cola": 1}, estoque)
+
+    def test_nao_deve_retirar_mais_que_o_estoque(self):
+        maquina = MaquinaBebidas(estoque_inicial={"Coca-Cola": 1})
+        with self.assertRaises(Exception) as context:
+            maquina.retirar("Coca-Cola", 2)
+        self.assertTrue("Estoque insuficiente" in str(context.exception))
