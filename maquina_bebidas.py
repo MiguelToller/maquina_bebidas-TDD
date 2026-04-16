@@ -27,6 +27,9 @@ class MaquinaBebidas:
         return self._estoque
     
     def abastecer(self, bebida, quantidade):
+        # Verifica se a quantidade e menor ou igual a 0
+        if quantidade <= 0:
+            raise Exception("Quantidade deve ser positiva")
         # Verifica se a bebida existe na maquina
         if bebida not in self._BEBIDAS_VALIDAS:
             raise Exception("Bebida nao cadastrada")
