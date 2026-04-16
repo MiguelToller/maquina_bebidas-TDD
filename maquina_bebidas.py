@@ -15,11 +15,15 @@ class MaquinaBebidas:
         return self._estoque
     
     def retirar(self, bebida, quantidade):
-        # Verifica se a quantidade pedida e maior que o estoque atual
-        # Caso nao ache a bebida retorna 0
-        if quantidade > self._estoque.get(bebida, 0):
+        # Verifica se a bebida existe na maquina
+        if bebida not in self._BEBIDAS_VALIDAS:
+            raise Exception("Bebida nao cadastrada")
+        # Pega o estoque atual e compara com a quantidade pedida
+        estoque_atual = self._estoque.get(bebida, 0)
+        if quantidade > estoque_atual:
             raise Exception("Estoque insuficiente")
-        self._estoque[bebida] -= quantidade
+        # Retira a bebida do estoque
+        self._estoque[bebida] = estoque_atual - quantidade
         return self._estoque
     
     def abastecer(self, bebida, quantidade):

@@ -23,13 +23,19 @@ class TestBebidas(TestCase):
             maquina.retirar("Coca-Cola", 2)
         self.assertTrue("Estoque insuficiente" in str(context.exception))
 
+    def test_nao_deve_retirar_bebida_nao_cadastrada(self):
+        maquina = MaquinaBebidas(estoque_inicial={"Sprite": 1})
+        with self.assertRaises(Exception) as context:
+            maquina.retirar("Suco", 1)
+        self.assertTrue("Bebida nao cadastrada" in str(context.exception))
+
     def test_nao_deve_abastecer_bebida_nao_cadastrada(self):
         maquina = MaquinaBebidas(estoque_inicial={"Coca-Cola": 0})
         with self.assertRaises(Exception) as context:
-            maquina.abastecer("Cerveja", 5)
+            maquina.abastecer("Suco", 5)
         self.assertTrue("Bebida nao cadastrada" in str(context.exception))
 
     def test_nao_deve_iniciar_maquina_com_bebida_nao_cadastrada(self):
         with self.assertRaises(Exception) as context:
-            MaquinaBebidas(estoque_inicial={"Cerveja": 2})
+            MaquinaBebidas(estoque_inicial={"Suco": 2})
         self.assertTrue("Bebida nao cadastrada" in str(context.exception))
