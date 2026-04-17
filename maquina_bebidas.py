@@ -5,9 +5,11 @@ class MaquinaBebidas:
 
     _BEBIDAS_VALIDAS = ["Coca-Cola", "Sprite", "Guarana", "Agua"]
 
-    def __init__(self, estoque_inicial: dict[str, int] = None):
-        self._estoque = estoque_inicial if estoque_inicial else {}
+    def __init__(self, estoque_inicial: dict[str, int] | None = None):
+        self._estoque: dict[str, int] = estoque_inicial if estoque_inicial else {}
+        self._validar_estoque()
 
+    def _validar_estoque(self):
         for bebida, quantidade in self._estoque.items():
             if bebida not in self._BEBIDAS_VALIDAS:
                 raise ValueError(MensagensErro.BEBIDA_NAO_CADASTRADA.value)
