@@ -26,6 +26,11 @@ class TestBebidas(TestCase):
         estoque_esperado = {"Sprite": 1, "Agua": 2}
         self.assertEqual(estoque_esperado, maquina.estoque)
 
+    def test_deve_iniciar_com_estoque_vazio_quando_nenhum_parametro_e_passado(self):
+        # Iniciando sem passar estoque_inicial (None)
+        maquina = MaquinaBebidas()
+        self.assertEqual({}, maquina.estoque)
+
     def test_nao_deve_retirar_mais_que_o_estoque(self):
         maquina = MaquinaBebidas(estoque_inicial={"Coca-Cola": 1})
         with self.assertRaises(ValueError) as context:
