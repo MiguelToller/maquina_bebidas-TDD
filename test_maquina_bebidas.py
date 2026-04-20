@@ -15,6 +15,17 @@ class TestBebidas(TestCase):
         estoque = maquina.abastecer("Coca-Cola", 1)
         self.assertEqual({"Coca-Cola": 1}, estoque)
 
+    def test_deve_manter_consistencia_em_serie_de_operacoes(self):
+        maquina = MaquinaBebidas(estoque_inicial={"Sprite": 5})
+
+        maquina.abastecer("Sprite", 5) # 10 Sprites
+        maquina.retirar("Sprite", 9)   # 1 Sprites
+        maquina.abastecer("Agua", 3)   # 3 Aguas
+        maquina.retirar("Agua", 1)     # 2 Aguas
+
+        estoque_esperado = {"Sprite": 1, "Agua": 2}
+        self.assertEqual(estoque_esperado, maquina.estoque)
+
     def test_nao_deve_retirar_mais_que_o_estoque(self):
         maquina = MaquinaBebidas(estoque_inicial={"Coca-Cola": 1})
         with self.assertRaises(ValueError) as context:
@@ -63,5 +74,5 @@ class TestBebidas(TestCase):
         self.assertEqual(MensagensErro.QUANTIDADE_ZERO.value, str(context_retirar.exception))
 
         with self.assertRaises(ValueError) as context_abastecer:
-            maquina.abastecer("SPrite", 0)
+            maquina.abastecer("Sprite", 0)
         self.assertEqual(MensagensErro.QUANTIDADE_ZERO.value, str(context_abastecer.exception))
