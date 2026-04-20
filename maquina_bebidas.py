@@ -6,7 +6,7 @@ class MaquinaBebidas:
     _BEBIDAS_VALIDAS = ["Coca-Cola", "Sprite", "Guarana", "Agua"]
 
     def __init__(self, estoque_inicial: dict[str, int] | None = None):
-        self._estoque: dict[str, int] = estoque_inicial if estoque_inicial else {}
+        self._estoque: dict[str, int] = estoque_inicial.copy() if estoque_inicial else {}
         self._validar_estoque()
 
     def _validar_estoque(self):
@@ -17,10 +17,10 @@ class MaquinaBebidas:
                 raise ValueError(MensagensErro.QUANTIDADE_INVALIDA.value)
 
     @property
-    def estoque(self):
-        return self._estoque
+    def estoque(self) -> dict[str, int]:
+        return self._estoque.copy()
     
-    def retirar(self, bebida: str, quantidade: int):
+    def retirar(self, bebida: str, quantidade: int) -> dict[str, int]:
         if quantidade <= 0:
             raise ValueError(MensagensErro.QUANTIDADE_INVALIDA.value)
         if bebida not in self._BEBIDAS_VALIDAS:
@@ -35,7 +35,7 @@ class MaquinaBebidas:
         self._estoque[bebida] = estoque_atual - quantidade
         return self._estoque
     
-    def abastecer(self, bebida: str, quantidade: int):
+    def abastecer(self, bebida: str, quantidade: int) -> dict[str, int]:
         if quantidade <= 0:
             raise ValueError(MensagensErro.QUANTIDADE_INVALIDA.value)
         if bebida not in self._BEBIDAS_VALIDAS:
