@@ -63,7 +63,7 @@ class MaquinaBebidas:
             quantidade: Quantidade a ser retirada (deve ser > que 0).
 
         Returns:
-            Dicionario atualizado com o estoque.
+            Copia do dicionario atualizado com o estoque.
 
         Raises:
             ValueError: Se tentar retirar mais que o estoque,
@@ -76,7 +76,7 @@ class MaquinaBebidas:
             raise ValueError(MensagensErro.ESTOQUE_INSUFICIENTE.value)
         
         self._estoque[bebida] = estoque_atual - quantidade
-        return self._estoque
+        return self._estoque.copy()
     
     def abastecer(self, bebida: str, quantidade: int) -> dict[str, int]:
         """
@@ -87,7 +87,7 @@ class MaquinaBebidas:
             quantidade: Quantidade a ser abastecida (deve ser > que 0).
 
         Returns:
-            Dicionario atualizado com o estoque.
+            Copia do dicionario atualizado com o estoque.
 
         Raises:
             ValueError: Se a quantidade ou a bebida forem invalidas.
@@ -97,4 +97,4 @@ class MaquinaBebidas:
         estoque_atual = self._estoque.get(bebida, 0)
         self._estoque[bebida] = estoque_atual + quantidade
 
-        return self._estoque
+        return self._estoque.copy()
