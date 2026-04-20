@@ -54,3 +54,14 @@ class TestBebidas(TestCase):
         with self.assertRaises(ValueError) as context:
             MaquinaBebidas(estoque_inicial={"Coca-Cola": -1})
         self.assertEqual(MensagensErro.QUANTIDADE_INVALIDA.value, str(context.exception))
+
+    def test_nao_deve_aceitar_quantidade_zero(self):
+        maquina = MaquinaBebidas(estoque_inicial={"Sprite": 5})
+        
+        with self.assertRaises(ValueError) as context_retirar:
+            maquina.retirar("Sprite", 0)
+        self.assertEqual(MensagensErro.QUANTIDADE_ZERO.value, str(context_retirar.exception))
+
+        with self.assertRaises(ValueError) as context_abastecer:
+            maquina.abastecer("SPrite", 0)
+        self.assertEqual(MensagensErro.QUANTIDADE_ZERO.value, str(context_abastecer.exception))
