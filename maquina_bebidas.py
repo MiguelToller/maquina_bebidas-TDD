@@ -40,9 +40,11 @@ class MaquinaBebidas:
             quantidade: Quantidade da bebida escolhida. 
 
         Raises:
-            ValueError: Se a quantidade for <= 0 ou a bebida for invalida.
+            ValueError: Se a quantidade for igual a 0, menor que 0 ou a bebida for invalida.
         """
-        if quantidade <= 0:
+        if quantidade == 0:
+            raise ValueError(MensagensErro.QUANTIDADE_ZERO.value)
+        if quantidade < 0:
             raise ValueError(MensagensErro.QUANTIDADE_INVALIDA.value)
         if bebida not in self._BEBIDAS_VALIDAS:
             raise ValueError(MensagensErro.BEBIDA_NAO_CADASTRADA.value)
