@@ -8,7 +8,7 @@ O objetivo principal é exercitar o **Desenvolvimento Orientado a Testes (TDD)**
 
 ---
 
-## 🐍 O que é `venv` (ambiente virtual)?
+## O que é `venv` (ambiente virtual)?
 
 O **venv** é uma ferramenta do Python usada para criar **ambientes virtuais isolados**.
 
@@ -17,52 +17,41 @@ Ele cria uma pasta dentro do projeto contendo:
 - Uma cópia do executável do Python  
 - Um espaço próprio para instalar bibliotecas  
 
-### ✅ Objetivo principal
-
-Isolar dependências de cada projeto, evitando conflitos entre versões de bibliotecas ou do Python.
-
 ---
 
-## 🚀 Vantagens do `venv`
+## Vantagens do `venv`
 
-### 🔒 1. Evitar conflitos de dependências
+### 1. Evitar conflitos de dependências
 Cada projeto possui suas próprias bibliotecas e versões.
 
 > Exemplo: este projeto utiliza `StrEnum` (Python 3.11+), garantindo compatibilidade.
 
 ---
 
-### 📦 2. Facilidade para o time (`requirements.txt`)
+### 2. Facilidade para o time (`requirements.txt`)
 
 Permite compartilhar exatamente as dependências necessárias.
 
-#### 📌 Gerar arquivo de dependências
+#### Gerar arquivo de dependências
 ```bash
 pip freeze > requirements.txt
 ```
 
-#### 📌 Instalar dependências
+#### Instalar dependências
 ```bash
 pip install -r requirements.txt
 ```
 
 ---
 
-### 🔑 3. Sem necessidade de permissões administrativas
+## Comandos básicos do `venv`
 
-- Não precisa usar `sudo` ou "Executar como administrador"
-- As bibliotecas são instaladas localmente no projeto
-
----
-
-## ⚙️ Comandos básicos do `venv`
-
-### ▶️ Criar ambiente virtual
+### Criar ambiente virtual
 ```bash
 python -m venv .venv
 ```
 
-### ▶️ Ativar ambiente
+### Ativar ambiente
 
 #### Windows
 ```bash
@@ -74,15 +63,11 @@ python -m venv .venv
 source .venv/bin/activate
 ```
 
-✅ Após ativar, você verá `(.venv)` no terminal → ambiente ativo.
-
 ---
 
-## 🧪 TDD — Test-Driven Development
+## TDD — Test-Driven Development
 
-### 🔁 1. Conceito (Ciclo Red-Green-Refactor)
-
-O TDD é uma abordagem onde você:
+### 1. Conceito (Ciclo Red-Green-Refactor)
 
 > Primeiro escreve o teste → depois o código
 
@@ -109,38 +94,36 @@ Melhorar o código sem quebrar os testes.
 
 ---
 
-## 💡 Por que usar TDD?
+## Por que usar TDD?
 
-### ✔️ Benefícios principais
-
-#### 🧩 Melhor design de código
+#### Melhor design de código
 Código mais modular, desacoplado e seguro.
 
-#### 📖 Documentação viva
+#### Documentação viva
 Os testes (`test_bebidas.py`) mostram exatamente como o sistema funciona.
 
-#### 🛡️ Segurança para mudanças
+#### Segurança para mudanças
 Permite refatorar com confiança, evitando regressões.
 
 ---
 
-## 📌 Regras de Negócio Implementadas
+## Regras de Negócio Implementadas
 
-- ✅ **Validação de Catálogo**  
+- **Validação de Catálogo**  
   Apenas bebidas pré-aprovadas (`Coca-Cola`, `Sprite`, `Guaraná`, `Água`)
 
-- ✅ **Controle de Saldo**  
+- **Controle de Saldo**  
   Impede retiradas acima do estoque disponível
 
-- ✅ **Integridade Numérica**  
+- **Integridade Numérica**  
   Bloqueia valores negativos ou zero
 
-- ✅ **Proteção de Dados**  
+- **Proteção de Dados**  
   Uso de encapsulamento com `@property` e `.copy()`
 
 ---
 
-## 🚀 Como Executar os Testes
+## Como Executar os Testes
 
 Com o ambiente virtual ativo:
 
@@ -150,7 +133,7 @@ python -m unittest
 
 ---
 
-## 📂 Estrutura do Projeto
+## Estrutura do Projeto
 
 ```
 maquina_bebidas-TDD/
