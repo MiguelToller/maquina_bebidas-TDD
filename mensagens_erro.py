@@ -1,9 +1,7 @@
-from enum import Enum
-from dataclasses import dataclass
+from enum import StrEnum
 
-@dataclass(frozen=True)
-class MensagensErro(Enum):
-    BEBIDA_NAO_CADASTRADA: str = "Bebida nao cadastrada"
-    QUANTIDADE_INVALIDA: str = "Quantidade deve ser positiva"
-    QUANTIDADE_ZERO: str = "Quantidade deve ser maior que 0"
-    ESTOQUE_INSUFICIENTE: str = "Estoque insuficiente"
+class MensagensErro(StrEnum):
+    BEBIDA_NAO_CADASTRADA = "Bebida nao cadastrada"
+    QUANTIDADE_INVALIDA = "Quantidade deve ser positiva"
+    QUANTIDADE_ZERO = "Quantidade deve ser maior que 0"
+    ESTOQUE_INSUFICIENTE = "Estoque insuficiente"

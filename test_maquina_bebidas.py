@@ -35,49 +35,49 @@ class TestBebidas(TestCase):
         maquina = MaquinaBebidas(estoque_inicial={"Coca-Cola": 1})
         with self.assertRaises(ValueError) as context:
             maquina.retirar("Coca-Cola", 2)
-        self.assertEqual(MensagensErro.ESTOQUE_INSUFICIENTE.value, str(context.exception))
+        self.assertEqual(MensagensErro.ESTOQUE_INSUFICIENTE, str(context.exception))
 
     def test_nao_deve_retirar_bebida_nao_cadastrada(self):
         maquina = MaquinaBebidas(estoque_inicial={"Sprite": 1})
         with self.assertRaises(ValueError) as context:
             maquina.retirar("Suco", 1)
-        self.assertEqual(MensagensErro.BEBIDA_NAO_CADASTRADA.value, str(context.exception))
+        self.assertEqual(MensagensErro.BEBIDA_NAO_CADASTRADA, str(context.exception))
 
     def test_nao_deve_abastecer_bebida_nao_cadastrada(self):
         maquina = MaquinaBebidas(estoque_inicial={"Coca-Cola": 0})
         with self.assertRaises(ValueError) as context:
             maquina.abastecer("Suco", 5)
-        self.assertEqual(MensagensErro.BEBIDA_NAO_CADASTRADA.value, str(context.exception))
+        self.assertEqual(MensagensErro.BEBIDA_NAO_CADASTRADA, str(context.exception))
 
     def test_nao_deve_iniciar_maquina_com_bebida_nao_cadastrada(self):
         with self.assertRaises(ValueError) as context:
             MaquinaBebidas(estoque_inicial={"Suco": 2})
-        self.assertEqual(MensagensErro.BEBIDA_NAO_CADASTRADA.value, str(context.exception))
+        self.assertEqual(MensagensErro.BEBIDA_NAO_CADASTRADA, str(context.exception))
 
     def test_nao_deve_retirar_bebida_com_valor_negativo(self):
         maquina = MaquinaBebidas(estoque_inicial={"Sprite": 5})
         with self.assertRaises(ValueError) as context:
             maquina.retirar("Sprite", -1)
-        self.assertEqual(MensagensErro.QUANTIDADE_INVALIDA.value, str(context.exception))
+        self.assertEqual(MensagensErro.QUANTIDADE_INVALIDA, str(context.exception))
 
     def test_nao_deve_abastecer_bebida_com_valor_negativo(self):
         maquina = MaquinaBebidas(estoque_inicial={"Coca-Cola": 5})
         with self.assertRaises(ValueError) as context:
             maquina.abastecer("Coca-Cola", -1)
-        self.assertEqual(MensagensErro.QUANTIDADE_INVALIDA.value, str(context.exception))
+        self.assertEqual(MensagensErro.QUANTIDADE_INVALIDA, str(context.exception))
 
     def test_nao_deve_iniciar_maquina_com_estoque_negativo(self):
         with self.assertRaises(ValueError) as context:
             MaquinaBebidas(estoque_inicial={"Coca-Cola": -1})
-        self.assertEqual(MensagensErro.QUANTIDADE_INVALIDA.value, str(context.exception))
+        self.assertEqual(MensagensErro.QUANTIDADE_INVALIDA, str(context.exception))
 
     def test_nao_deve_aceitar_quantidade_zero(self):
         maquina = MaquinaBebidas(estoque_inicial={"Sprite": 5})
         
         with self.assertRaises(ValueError) as context_retirar:
             maquina.retirar("Sprite", 0)
-        self.assertEqual(MensagensErro.QUANTIDADE_ZERO.value, str(context_retirar.exception))
+        self.assertEqual(MensagensErro.QUANTIDADE_ZERO, str(context_retirar.exception))
 
         with self.assertRaises(ValueError) as context_abastecer:
             maquina.abastecer("Sprite", 0)
-        self.assertEqual(MensagensErro.QUANTIDADE_ZERO.value, str(context_abastecer.exception))
+        self.assertEqual(MensagensErro.QUANTIDADE_ZERO, str(context_abastecer.exception))

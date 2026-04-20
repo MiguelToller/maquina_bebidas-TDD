@@ -27,9 +27,9 @@ class MaquinaBebidas:
         """
         for bebida, quantidade in self._estoque.items():
             if bebida not in self._BEBIDAS_VALIDAS:
-                raise ValueError(MensagensErro.BEBIDA_NAO_CADASTRADA.value)
+                raise ValueError(MensagensErro.BEBIDA_NAO_CADASTRADA)
             if quantidade < 0:
-                raise ValueError(MensagensErro.QUANTIDADE_INVALIDA.value)
+                raise ValueError(MensagensErro.QUANTIDADE_INVALIDA)
 
     def _validar_operacao(self, bebida: str, quantidade: int) -> None:
         """
@@ -43,11 +43,11 @@ class MaquinaBebidas:
             ValueError: Se a quantidade for igual a 0, menor que 0 ou a bebida for invalida.
         """
         if quantidade == 0:
-            raise ValueError(MensagensErro.QUANTIDADE_ZERO.value)
+            raise ValueError(MensagensErro.QUANTIDADE_ZERO)
         if quantidade < 0:
-            raise ValueError(MensagensErro.QUANTIDADE_INVALIDA.value)
+            raise ValueError(MensagensErro.QUANTIDADE_INVALIDA)
         if bebida not in self._BEBIDAS_VALIDAS:
-            raise ValueError(MensagensErro.BEBIDA_NAO_CADASTRADA.value)
+            raise ValueError(MensagensErro.BEBIDA_NAO_CADASTRADA)
 
     @property
     def estoque(self) -> dict[str, int]:
@@ -75,7 +75,7 @@ class MaquinaBebidas:
         
         estoque_atual = self._estoque.get(bebida, 0)
         if quantidade > estoque_atual:
-            raise ValueError(MensagensErro.ESTOQUE_INSUFICIENTE.value)
+            raise ValueError(MensagensErro.ESTOQUE_INSUFICIENTE)
         
         self._estoque[bebida] = estoque_atual - quantidade
         return self._estoque.copy()
