@@ -6,8 +6,6 @@ class MaquinaBebidas:
     Maquina de bebidas que gerencia o estoque de produtos.
     """
 
-    _BEBIDAS_VALIDAS = ["Coca-Cola", "Sprite", "Guarana", "Agua"]
-
     def __init__(self, estoque_inicial: dict[str, int] | None = None):
         """
         Inicializa a maquina com um estoque opcional.
@@ -15,6 +13,8 @@ class MaquinaBebidas:
         Args:
             estoque_inicial: Dicionario onde a chave e o nome da bebida e o valor e a quantidade.
         """
+        self._bebidas_validas = ["Coca-Cola", "Sprite", "Guarana", "Agua"]
+
         self._estoque: dict[str, int] = estoque_inicial.copy() if estoque_inicial else {}
         self._validar_estoque()
 
@@ -26,7 +26,7 @@ class MaquinaBebidas:
             ValueError: Se a bebida nao estiver cadastrada ou a quantidade for negativa.
         """
         for bebida, quantidade in self._estoque.items():
-            if bebida not in self._BEBIDAS_VALIDAS:
+            if bebida not in self._bebidas_validas:
                 raise ValueError(MensagensErro.BEBIDA_NAO_CADASTRADA)
             if quantidade < 0:
                 raise ValueError(MensagensErro.QUANTIDADE_INVALIDA)
@@ -46,7 +46,7 @@ class MaquinaBebidas:
             raise ValueError(MensagensErro.QUANTIDADE_ZERO)
         if quantidade < 0:
             raise ValueError(MensagensErro.QUANTIDADE_INVALIDA)
-        if bebida not in self._BEBIDAS_VALIDAS:
+        if bebida not in self._bebidas_validas:
             raise ValueError(MensagensErro.BEBIDA_NAO_CADASTRADA)
 
     @property
@@ -100,3 +100,13 @@ class MaquinaBebidas:
         self._estoque[bebida] = estoque_atual + quantidade
 
         return self._estoque.copy()
+    
+    def cadastrar_bebida(self, bebida: str) -> None:
+        """
+        Cadastra uma nova bebida no sistema.
+
+        Args:
+            bebida: Nome da bebida a ser cadastrada.
+        """
+        if bebida not in self._bebidas_validas:
+            self._bebidas_validas.append(bebida)
