@@ -87,3 +87,14 @@ class TestBebidas(TestCase):
         with self.assertRaises(ValueError) as context_abastecer:
             maquina.abastecer("Sprite", 0)
         self.assertEqual(MensagensErro.QUANTIDADE_ZERO, str(context_abastecer.exception))
+
+    def test_nao_deve_cadastrar_bebida_com_nome_vazio(self):
+        maquina = MaquinaBebidas()
+
+        with self.assertRaises(ValueError) as context_1:
+            maquina.cadastrar_bebida("") # String vazia
+        self.assertEqual(MensagensErro.NOME_INVALIDO, str(context_1.exception))
+
+        with self.assertRaises(ValueError) as context_2:
+            maquina.cadastrar_bebida("  ") # String com espacos em branco
+        self.assertEqual(MensagensErro.NOME_INVALIDO, str(context_2.exception))

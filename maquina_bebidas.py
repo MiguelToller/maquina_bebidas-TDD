@@ -107,6 +107,12 @@ class MaquinaBebidas:
 
         Args:
             bebida: Nome da bebida a ser cadastrada.
+
+        Raises:
+            ValueError: Se o nome da bebida for vazio ou conter espacos.
         """
+        if not bebida.strip():
+            raise ValueError(MensagensErro.NOME_INVALIDO)
+
         if bebida not in self._bebidas_validas:
             self._bebidas_validas.append(bebida)
