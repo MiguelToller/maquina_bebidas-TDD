@@ -113,6 +113,8 @@ class MaquinaBebidas:
         """
         if not bebida.strip():
             raise ValueError(MensagensErro.NOME_INVALIDO)
+        
+        bebida_normalizada = bebida.strip().title()
 
-        if bebida not in self._bebidas_validas:
-            self._bebidas_validas.append(bebida)
+        if bebida_normalizada not in self._bebidas_validas:
+            self._bebidas_validas.append(bebida_normalizada)

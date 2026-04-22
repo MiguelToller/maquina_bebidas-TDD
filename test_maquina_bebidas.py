@@ -37,6 +37,15 @@ class TestBebidas(TestCase):
         estoque = maquina.abastecer("Energetico", 5)
         self.assertEqual({"Energetico": 5}, estoque)
 
+    def test_deve_normalizar_bebida_com_maiusculo_e_minusculo(self):
+        maquina = MaquinaBebidas()
+
+        maquina.cadastrar_bebida("cafe")
+        maquina.cadastrar_bebida("CAFE")
+
+        estoque = maquina.abastecer("Cafe", 5)
+        self.assertEqual({"Cafe": 5}, estoque)
+
     def test_nao_deve_retirar_mais_que_o_estoque(self):
         maquina = MaquinaBebidas(estoque_inicial={"Coca-Cola": 1})
         with self.assertRaises(ValueError) as context:
